@@ -9,14 +9,13 @@
         rel="stylesheet"
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossorigin="anonymous"
-    />
+        crossorigin="anonymous"/>
     <script
-			defer
-			src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
-			integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"
-			crossorigin="anonymous"
-    ></script>
+        defer
+        src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
+        integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"
+        crossorigin="anonymous">
+    </script>
 
 </head>
 <body>
@@ -65,128 +64,6 @@
         </div>  
     </div>
     
-    
-    <script>
-
-        // get the heading element
-        const headingEl = document.querySelector("#headingTotal");
-
-        //get the reference to desc element
-        const inputDescEl = document.querySelector("#inputDesc");
-
-        // ref to input amount
-        const inputElement = document.querySelector("#inputAmount");
-
-        // Get the ref to table
-        const expenseTableEl = document.querySelector("#expenseTable")
-
-        // init value of expense at 0
-        let totalExpense = 0;
-
-        // set the heading element to totalExpense
-        headingEl.textContent = totalExpense;
-
-        // allExpenses at one place
-        const allExpenses = [];
-
-        // onButtonClick add inputAmount to totalExpense
-        function addExpenseToTotal() {
-
-            const expenseItem = {};
-
-            // read value from inputAmount
-            const textAmount = inputElement.value;
-
-            // read the desc from inputDesc
-            const textDesc = inputDescEl.value;
-
-
-            // convert it to number
-            const expense = parseInt(textAmount, 10);
-
-            // put it in object 
-            expenseItem.desc = textDesc;
-            expenseItem.amount = expense;
-            expenseItem.moment = new Date();
-
-            allExpenses.push(expenseItem);
-
-
-
-            // add that value to totalExpense
-            totalExpense = totalExpense + expense;
-            // console.log({ totalExpense })
-
-            // set the heading element to totalExpense
-            const someText = `Total: ${totalExpense}`
-            headingEl.textContent = someText;
-
-
-            renderList(allExpenses);
-
-
-        }
-           
-
-           
-        
-
-        // Get the btn element
-        const element = document.querySelector("#btnAddExpense");
-        // console.log(element);
-        
-        // Listen to click event
-        element.addEventListener("click", addExpenseToTotal, false);
-
-        // Controller Functions
-
-        // Get Date String
-        function getDateString(momento) {
-            return momento.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-            })
-        }
-
-        //Delete Items
-        function deleteItem(dateValue) {
-            const newArr = allExpenses.filter(expense => expense.moment.valueOf() !== dateValue)
-            renderList(newArr);
-        }
-
-        // View Layer 
-
-        function renderList(arrOfList) {
-            const allExpenseHTML = arrOfList.map(expense => createListItem(expense));
-            const joinedAllExpenseHTML =  allExpenseHTML.join('');
-            expenseTableEl.innerHTML = joinedAllExpenseHTML;
-        }
-
-        function createListItem({ desc, amount, moment }) {
-            return `
-                <li class="list-group-item d-flex justify-content-between">
-                        <div class="d-flex flex-column">
-                            ${desc}
-                            <small class="text-muted">${getDateString(moment)}</small>
-                        </div>
-                        <div>
-                            <span class="px-5">
-                                ${amount}
-                            </span>
-                            <button 
-                                type="button" 
-                                class="btn btn-outline-danger btn-sm"
-                                onclick = "deleteItem(${moment.valueOf()})"
-                                >
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </div>
-                    </li>
-                `;
-        }
-
-
-    </script>
+    <script src="index.js"></script>
 </body>
 </html>
